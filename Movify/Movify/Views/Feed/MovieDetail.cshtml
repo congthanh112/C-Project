@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    var movie = ViewBag.movie;
+    var customer = (Customer) @ViewBag.customer;
+}
+
+<div>
+    @TempData["msgresponse"]
+</div>
+
+<h1>@movie.name</h1>
+
+<div>
+    <h2>Current Showtimes</h2>
+    @foreach(var ms in movie.MovieShows)
+    if (ms.status) {
+        <div>
+            <div>
+                <div>
+                    Start Time: @ms.startTime
+                </div>
+                <div>
+                    End Time: @ms.endTime
+                </div>
+                <div>
+                    Price: $@ms.price
+                </div>
+                <div>
+                    Theater: @if (ms.theater.status) @ms.theater.name
+                </div>
+                <div>
+                    <a href="/Feed/BookTicket/@ms.id">Order Ticket Now</a>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    }
+</div>
+
+<div>
+    <img src="@movie.posterURL" alt="Poster Img" />
+</div>
+<div>
+    <div>Genre: @if (movie.genre.status) { @movie.genre.name } </div>
+    <div>
+        Actors: @movie.actors
+    </div>
+    <div>
+        Release Date: @movie.releaseDate?.ToString("dd/MM/yyyy")
+    </div>
+    <div>
+        Duration: @movie.duration
+    </div>
+</div>
+<div>
+    <div>Trailer</div>
+    <iframe width="560" height="315" src="@movie.trailerURL" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen></iframe>
+</div>
+<div>
+    <h3>Description</h3>
+    <div>
+        @movie.description
+    </div>
+</div>
+

@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var errors = (List<string>) ViewBag.errors;
+}
+
+<div class="row">
+
+    <div class="col-md-8 mx-auto">
+
+        <div class="text-center">
+            <h1>Sign Up</h1>
+        </div>
+
+        <div class="col-sm-8 mx-auto">
+            @if (errors != null && errors.Count > 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    Please check the following errors:
+                    <ul>
+                        @foreach (var err in errors)
+                        {
+                            <li>@err </li>
+                        }
+                    </ul>
+                </div>
+            }
+            <form method="post" asp-action="Register" asp-controller="Customer">
+                <div class="form-group">
+                    <label for="__email">Email*:</label>
+                    <input class="form-control" id="__email" type="email" name="email" placeholder="Ex. email@example.com" required value="@ViewData["email"]"/>
+                </div>
+                <div class="form-group">
+                    <label for="__email">Password*:</label>
+                    <input class="form-control" id="__password" type="password" name="password" placeholder="Enter at least 8 characters" required value="@ViewData["password"]" />
+                </div>
+                <div class="form-group">
+                    <label for="__dob">Date Of Birth*:</label>
+                    <input class="form-control" id="__dob" type="date" name="dob" required value="@ViewData["dob"]" />
+                </div>
+                <div class="form-group">
+                    <label for="__phone">Phone*</label>
+                    <input class="form-control" id="__phone" type="text" name="phone" required value="@ViewData["phone"]" placeholder="Your phone number" />
+                </div>
+                <div class="form-group">
+                    <label for="__name">Name*</label>
+                    <input class="form-control" id="__name" type="text" name="name" required value="@ViewData["name"]" placeholder="Your full name"/>
+                </div>
+                <div class="form-group">
+                    <label for="__address">Address</label>
+                    <input class="form-control" id="__address" type="text" name="address" value="@ViewData["address"]" placeholder="Your address"/>
+                </div>
+                <div class="form-group text-center">
+                    <input class="btn btn-primary" type="submit" value="Register" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

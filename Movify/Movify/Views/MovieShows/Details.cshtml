@@ -1,0 +1,88 @@
+﻿@model Movify.Models.MovieShow
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MovieShow</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.startTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.startTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.endTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.endTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.theater)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.theater.name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.movie)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.movie.description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<div>
+    @{
+        var tickets = Model.tickets;
+        @foreach (var ticket in tickets)
+        {
+            <div>
+                <hr />
+                <div>
+                    ID:  @ticket.id
+                </div>
+                <div>
+                    Paymnet Date: @ticket.paymentDate
+                </div>
+                <div>
+                    Movie: @ticket.MovieShow.movie.name
+                </div>
+                <div>
+                    @{
+                        var alpha_i = (char)(65 + ticket.Seat.r);
+                        var alpha_j = ticket.Seat.c + 1;
+                    }
+                    Seat: @alpha_i@alpha_j
+                </div>
+                <div>
+                    Theater: @ticket.MovieShow.theater.name
+                </div>
+                <div>
+                    Customer: @ticket.Customer.name
+                </div>
+            </div>
+        }
+    }
+</div>

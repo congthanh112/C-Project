@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var tickets = (List<Ticket>)ViewData["tickets"];
+}
+
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <h1>Your Tickets</h1>
+        @if (TempData["msgresponse"] != null)
+        {
+            <div class="alert alert-warning" role="alert">
+                @TempData["msgresponse"]
+            </div>
+        }
+        <div>
+            @foreach (var ticket in tickets)
+            {
+                <div>
+                    <hr />
+                    <div>
+                        ID:  @ticket.id
+                    </div>
+                    <div>
+                        Paymnet Date: @ticket.paymentDate
+                    </div>
+                    <div>
+                        Movie: @ticket.MovieShow.movie.name
+                    </div>
+                    <div>
+                        @{
+                            var alpha_i = (char)(65 + ticket.Seat.r);
+                            var alpha_j = ticket.Seat.c + 1;
+                        }
+                        Seat: @alpha_i@alpha_j
+                    </div>
+                    <div>
+                        Theater: @ticket.MovieShow.theater.name
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<h1>Your Recent Tickets</h1>
+
+
